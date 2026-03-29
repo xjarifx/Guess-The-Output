@@ -20,6 +20,10 @@
   body {
     background-color: #E5E7EB;
     color: #111827;
+    background-image: radial-gradient(rgba(0, 0, 0, 0.15) 2px, transparent 2px);
+    background-size: 30px 30px;
+    background-position: 0 0;
+    overflow: hidden;
     @apply font-sans antialiased min-h-screen flex flex-col items-center justify-center p-4;
   }
 
@@ -75,4 +79,13 @@
 }
 .animate-shake-brutal {
   animation: shakeBrutal 0.3s ease-in-out;
+}
+
+@keyframes scrollMarquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: scrollMarquee 45s linear infinite;
+  min-width: 200%;
 }

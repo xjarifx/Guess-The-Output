@@ -73,7 +73,21 @@ function App() {
   };
 
   return (
-    <div className="w-full max-w-3xl mx-auto p-4 md:p-8 relative">
+    <div className="w-full min-h-screen flex flex-col justify-center relative">
+      <div className="fixed inset-0 pointer-events-none overflow-hidden select-none z-0 hidden xl:block">
+        <div className="absolute top-10 left-10 text-[12rem] font-black opacity-[0.04] transform -rotate-12 tracking-tighter">JS</div>
+        <div className="absolute top-1/2 right-10 text-[8rem] font-black opacity-[0.04] transform rotate-12 tracking-widest whitespace-nowrap">{"{ } + [ ]"}</div>
+        <div className="absolute bottom-10 left-1/4 text-[6rem] font-black opacity-[0.04] transform rotate-6 whitespace-nowrap">typeof NaN</div>
+        <div className="absolute top-1/4 left-1/3 text-[20rem] font-black opacity-[0.02] transform -rotate-45">!</div>
+        <div className="absolute bottom-1/4 right-1/4 text-[8rem] font-black opacity-[0.04] transform -rotate-12 tracking-tighter">()=&gt;</div>
+        
+        {/* Massive brutalist geometric shapes strictly inside background */}
+        <div className="absolute top-1/3 left-10 w-32 h-32 bg-brutal-pink border-8 border-black opacity-10 rounded-full shadow-[12px_12px_0px_0px_rgba(0,0,0,1)]"></div>
+        <div className="absolute bottom-1/3 right-10 w-48 h-48 bg-brutal-blue border-8 border-black opacity-10 rotate-12 shadow-[12px_12px_0px_0px_rgba(0,0,0,1)]"></div>
+        <div className="absolute top-20 right-1/4 w-0 h-0 border-l-[60px] border-r-[60px] border-b-[100px] border-transparent border-b-black opacity-10 rotate-45 drop-shadow-[8px_8px_0px_rgba(0,0,0,1)]"></div>
+      </div>
+
+      <div className="w-full max-w-3xl mx-auto p-4 md:p-8 relative z-10 w-full">
       <button 
         onClick={() => { playClick(); toggleMute(); }}
         className={`fixed top-4 right-4 z-50 btn-brutal !py-2 !px-4 text-sm md:text-xl flex items-center gap-2 cursor-pointer shadow-brutal-sm hover:shadow-brutal ${isMuted ? 'bg-brutal-red text-white' : 'bg-white'}`}
@@ -141,6 +155,40 @@ function App() {
           </div>
         </div>
       )}
+      
+    </div>
+    
+      {/* Universal News Ticker Marquee Footer */}
+      <div className="fixed bottom-0 left-0 right-0 bg-brutal-yellow border-t-4 border-black text-black font-black text-xl md:text-2xl py-2 px-4 z-40 overflow-hidden whitespace-nowrap select-none pointer-events-none flex">
+        <div className="animate-marquee flex items-center gap-10 whitespace-nowrap">
+          <span>⚠️ WARNING: HIGH LEVELS OF CONTEXT LOSS DETECTED ⚠️</span>
+          <span>///</span>
+          <span>[] == ![] &rarr; true</span>
+          <span>///</span>
+          <span>typeof NaN &rarr; 'number'</span>
+          <span>///</span>
+          <span>0.1 + 0.2 !== 0.3</span>
+          <span>///</span>
+          <span>Math.max() &lt; Math.min()</span>
+          <span>///</span>
+          <span>"b" + "a" + + "a" + "a" &rarr; "baNaNa"</span>
+          <span>///</span>
+          
+          <span>⚠️ WARNING: HIGH LEVELS OF CONTEXT LOSS DETECTED ⚠️</span>
+          <span>///</span>
+          <span>[] == ![] &rarr; true</span>
+          <span>///</span>
+          <span>typeof NaN &rarr; 'number'</span>
+          <span>///</span>
+          <span>0.1 + 0.2 !== 0.3</span>
+          <span>///</span>
+          <span>Math.max() &lt; Math.min()</span>
+          <span>///</span>
+          <span>"b" + "a" + + "a" + "a" &rarr; "baNaNa"</span>
+          <span>///</span>
+        </div>
+      </div>
+    
     </div>
   );
 }
