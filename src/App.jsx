@@ -73,7 +73,7 @@ function App() {
   };
 
   return (
-    <div className="w-full min-h-screen flex flex-col justify-start sm:justify-center relative pb-14 pt-12 md:pt-0 sm:pb-20 md:pb-24 overflow-x-hidden">
+    <div className="w-full min-h-screen flex flex-col justify-start sm:justify-center relative pb-14 pt-4 md:pt-0 sm:pb-20 md:pb-24 overflow-x-hidden">
       <div className="fixed inset-0 pointer-events-none overflow-hidden select-none z-0 hidden xl:block">
         <div className="absolute top-10 left-10 text-[12rem] font-black opacity-[0.04] transform -rotate-12 tracking-tighter">JS</div>
         <div className="absolute top-1/2 right-10 text-[8rem] font-black opacity-[0.04] transform rotate-12 tracking-widest whitespace-nowrap">{"{ } + [ ]"}</div>
