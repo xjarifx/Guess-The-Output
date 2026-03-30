@@ -19,9 +19,9 @@ function App() {
 
   if (loading) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen">
-        <div className="bg-white border-4 border-black shadow-brutal p-8 text-2xl font-black animate-pulse flex items-center gap-3">
-          LOADING JS WEIRDNESS... <PixelHourglass className="w-8 h-8" />
+      <div className="flex flex-col items-center justify-center min-h-screen p-4">
+        <div className="bg-white border-4 border-black shadow-brutal p-4 md:p-8 text-xl md:text-2xl font-black animate-pulse flex items-center gap-2 md:gap-3 text-center">
+          LOADING JS WEIRDNESS... <PixelHourglass className="w-6 h-6 md:w-8 md:h-8" />
         </div>
       </div>
     );
@@ -73,7 +73,7 @@ function App() {
   };
 
   return (
-    <div className="w-full min-h-screen flex flex-col justify-start sm:justify-center relative pb-14 pt-4 md:pt-0 sm:pb-20 md:pb-24 overflow-x-hidden">
+    <div className="w-full min-h-screen flex flex-col justify-start sm:justify-center relative pt-4 md:pt-0 overflow-x-hidden pt-safe">
       <div className="fixed inset-0 pointer-events-none overflow-hidden select-none z-0 hidden xl:block">
         <div className="absolute top-10 left-10 text-[12rem] font-black opacity-[0.04] transform -rotate-12 tracking-tighter">JS</div>
         <div className="absolute top-1/2 right-10 text-[8rem] font-black opacity-[0.04] transform rotate-12 tracking-widest whitespace-nowrap">{"{ } + [ ]"}</div>
@@ -159,7 +159,7 @@ function App() {
     </div>
     
       {/* Universal News Ticker Marquee Footer */}
-      <div className="fixed bottom-0 left-0 right-0 bg-brutal-yellow border-t-4 border-black text-black font-black text-base md:text-2xl py-1 md:py-2 px-2 md:px-4 z-40 overflow-hidden whitespace-nowrap select-none pointer-events-none flex">
+      <div className="w-full mt-auto shrink-0 bg-brutal-yellow border-t-4 border-black text-black font-black text-base md:text-2xl py-1 md:py-2 px-2 md:px-4 z-40 overflow-hidden whitespace-nowrap select-none pointer-events-none flex">
         <div className="animate-marquee flex items-center gap-6 md:gap-10 whitespace-nowrap">
           <span>⚠️ WARNING: HIGH LEVELS OF CONTEXT LOSS DETECTED ⚠️</span>
           <span>///</span>
