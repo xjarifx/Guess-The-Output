@@ -44,7 +44,15 @@ const SPRITE_SOUND_OFF=[
   "..XX..X..",
   "...X....."
 ];
-const SPRITE_HOME = ["...X...","..XXX..",".X.X.X.","XXXXXXX","..XXX..","..X.X.."];
+const SPRITE_HOME = [
+  "...X...",
+  "..XXX..",
+  ".XXXXX.",
+  "XXXXXXX",
+  ".X...X.",
+  ".X.X.X.",
+  ".XXXXX."
+];
 const SPRITE_PARTY = ["..X....","X.X.X..",".X.XX..","...XXX.","....XX.","....X.."];
 const SPRITE_REFRESH=[".XXX...","X...X.X","X....XX","X...X..",".XXX..."];
 const SPRITE_COOL =  ["XXXXXXXXX","X.X.X.X.X","XXXXXXXXX",".........","..XXXXX..","...XXX..."];

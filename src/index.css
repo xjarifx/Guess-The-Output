@@ -10,24 +10,47 @@
   --font-sans: 'Outfit', sans-serif;
   --font-code: 'Fira Code', monospace;
 
-  --shadow-brutal: 6px 6px 0px 0px rgba(0,0,0,1);
-  --shadow-brutal-sm: 3px 3px 0px 0px rgba(0,0,0,1);
-  --shadow-brutal-interactive: 4px 4px 0px 0px rgba(0,0,0,1);
+  --shadow-brutal: 4px 4px 0px 0px rgba(0,0,0,1);
+  --shadow-brutal-sm: 2px 2px 0px 0px rgba(0,0,0,1);
+  --shadow-brutal-interactive: 3px 3px 0px 0px rgba(0,0,0,1);
   --shadow-brutal-active: 0px 0px 0px 0px rgba(0,0,0,1);
+
+  /* Custom border width for 3px brutalist borders */
+  --border-width-3: 3px;
 }
 
 @layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+  }
+
   body {
     background-color: #E5E7EB;
     color: #111827;
     background-image: 
-      radial-gradient(rgba(0, 0, 0, 0.15) 1px, transparent 1px),
-      linear-gradient(rgba(255,255,255,0.05) 50%, transparent 50%),
-      linear-gradient(90deg, rgba(255,255,255,0.05) 50%, transparent 50%);
-    background-size: 20px 20px, 4px 4px, 4px 4px;
-    background-position: 0 0, 0 0, 0 0;
+      radial-gradient(rgba(0, 0, 0, 0.15) 1px, transparent 1px);
+    background-size: 16px 16px;
     overflow-x: hidden;
     @apply font-sans antialiased min-h-screen relative;
+    /* Mobile: simpler background, no scanlines */
+  }
+
+  /* Scanline + noise textures only on larger screens for perf */
+  @media (min-width: 640px) {
+    body {
+      background-image: 
+        radial-gradient(rgba(0, 0, 0, 0.15) 1px, transparent 1px),
+        linear-gradient(rgba(255,255,255,0.05) 50%, transparent 50%),
+        linear-gradient(90deg, rgba(255,255,255,0.05) 50%, transparent 50%);
+      background-size: 20px 20px, 4px 4px, 4px 4px;
+    }
   }
   
   body::before {
@@ -41,6 +64,14 @@
     opacity: 0.05;
     pointer-events: none;
     z-index: 100;
+    /* Hide noise texture on mobile for performance */
+    display: none;
+  }
+
+  @media (min-width: 640px) {
+    body::before {
+      display: block;
+    }
   }
 
   h1, h2, h3, h4 {
@@ -49,12 +80,33 @@
 }
 
 @layer components {
-  /* Brutalist button base */
+  /* ===== BRUTALIST BUTTON — Mobile-First ===== */
   .btn-brutal {
-    @apply font-bold py-3 px-6 border-4 border-black bg-white
-           shadow-brutal transition-all duration-150 inline-flex items-center justify-center gap-2
-           hover:-translate-y-1 hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]
-           active:translate-y-1 active:translate-x-1 active:shadow-brutal-active;
+    @apply font-bold border-3 border-black bg-white
+           transition-all duration-150 inline-flex items-center justify-center gap-1.5
+           active:translate-y-0.5 active:translate-x-0.5 active:shadow-brutal-active;
+    /* Mobile: compact padding, smaller shadow */
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    box-shadow: var(--shadow-brutal-sm);
+  }
+  
+  /* Hover effects only on pointer devices */
+  @media (hover: hover) {
+    .btn-brutal:hover {
+      transform: translateY(-2px);
+      box-shadow: 6px 6px 0px 0px rgba(0,0,0,1);
+    }
+  }
+
+  @media (min-width: 640px) {
+    .btn-brutal {
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      border-width: 4px;
+      gap: 0.5rem;
+      box-shadow: var(--shadow-brutal);
+    }
   }
   
   .btn-brutal-pink {
@@ -73,15 +125,39 @@
     @apply bg-brutal-yellow text-black;
   }
 
-  /* Card base */
+  /* ===== CARD — Mobile-First ===== */
   .card-brutal {
-    @apply bg-white border-4 border-black shadow-brutal p-4 sm:p-6 md:p-8 w-full max-w-2xl mx-auto h-auto md:min-h-[600px] flex flex-col justify-center relative overflow-hidden;
+    @apply bg-white border-3 border-black w-full flex flex-col relative overflow-hidden;
+    /* Mobile: fill available space, minimal padding */
+    padding: 1rem;
+    box-shadow: var(--shadow-brutal-sm);
+    min-height: 0;
+    max-height: calc(100dvh - 8rem); /* Leave room for HUD + marquee */
+    justify-content: center;
+  }
+
+  @media (min-width: 640px) {
+    .card-brutal {
+      padding: 1.5rem;
+      border-width: 4px;
+      box-shadow: var(--shadow-brutal);
+      max-width: 42rem;
+      margin-left: auto;
+      margin-right: auto;
+      max-height: 700px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .card-brutal {
+      padding: 2rem;
+    }
   }
 }
 
-/* Micro Animations for Modals/Feedback */
+/* ===== MICRO ANIMATIONS ===== */
 @keyframes popInBrutal {
-  0% { transform: scale(0.9) translateY(10px); opacity: 0; }
+  0% { transform: scale(0.95) translateY(6px); opacity: 0; }
   100% { transform: scale(1) translateY(0); opacity: 1; }
 }
 .animate-pop-brutal {
@@ -90,8 +166,8 @@
 
 @keyframes shakeBrutal {
   0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(-10px) rotate(-2deg); }
-  75% { transform: translateX(10px) rotate(2deg); }
+  25% { transform: translateX(-6px) rotate(-1deg); }
+  75% { transform: translateX(6px) rotate(1deg); }
 }
 .animate-shake-brutal {
   animation: shakeBrutal 0.3s ease-in-out;
@@ -104,4 +180,23 @@
 .animate-marquee {
   animation: scrollMarquee 45s linear infinite;
   min-width: 200%;
+}
+
+/* ===== DESKTOP SHADOW SCALE-UP ===== */
+@media (min-width: 640px) {
+  :root {
+    --shadow-brutal: 6px 6px 0px 0px rgba(0,0,0,1);
+    --shadow-brutal-sm: 3px 3px 0px 0px rgba(0,0,0,1);
+    --shadow-brutal-interactive: 4px 4px 0px 0px rgba(0,0,0,1);
+  }
+}
+
+/* ===== SAFE AREA INSETS ===== */
+@supports (padding: env(safe-area-inset-bottom)) {
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .pt-safe {
+    padding-top: env(safe-area-inset-top);
+  }
 }

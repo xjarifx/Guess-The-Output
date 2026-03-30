@@ -19,9 +19,9 @@ function App() {
 
   if (loading) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen p-4">
-        <div className="bg-white border-4 border-black shadow-brutal p-4 md:p-8 text-xl md:text-2xl font-black animate-pulse flex items-center gap-2 md:gap-3 text-center">
-          LOADING JS WEIRDNESS... <PixelHourglass className="w-6 h-6 md:w-8 md:h-8" />
+      <div className="flex flex-col items-center justify-center min-h-dvh p-4">
+        <div className="bg-white border-3 sm:border-4 border-black shadow-brutal-sm sm:shadow-brutal p-4 sm:p-8 text-lg sm:text-2xl font-black animate-pulse flex items-center gap-2 sm:gap-3 text-center">
+          LOADING JS WEIRDNESS... <PixelHourglass className="w-6 h-6 sm:w-8 sm:h-8" />
         </div>
       </div>
     );
@@ -29,13 +29,12 @@ function App() {
 
   if (error) {
     return (
-      <div className="bg-brutal-red text-white border-4 border-black p-8 shadow-brutal font-bold text-xl">
+      <div className="bg-brutal-red text-white border-3 sm:border-4 border-black p-4 sm:p-8 shadow-brutal font-bold text-lg sm:text-xl">
         Error loading questions: {error}
       </div>
     );
   }
 
-  // Double check questions exist
   if (!questions || questions.length === 0) return null;
 
   const currentQuestion = questions[currentQuestionIndex];
@@ -73,7 +72,8 @@ function App() {
   };
 
   return (
-    <div className="w-full min-h-screen flex flex-col justify-start sm:justify-center relative pt-4 md:pt-0 overflow-x-hidden pt-safe">
+    <div className="w-full min-h-dvh flex flex-col relative overflow-x-hidden">
+      {/* ===== Decorative BG — xl only ===== */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden select-none z-0 hidden xl:block">
         <div className="absolute top-10 left-10 text-[12rem] font-black opacity-[0.04] transform -rotate-12 tracking-tighter">JS</div>
         <div className="absolute top-1/2 right-10 text-[8rem] font-black opacity-[0.04] transform rotate-12 tracking-widest whitespace-nowrap">{"{ } + [ ]"}</div>
@@ -81,86 +81,89 @@ function App() {
         <div className="absolute top-1/4 left-1/3 text-[20rem] font-black opacity-[0.02] transform -rotate-45">!</div>
         <div className="absolute bottom-1/4 right-1/4 text-[8rem] font-black opacity-[0.04] transform -rotate-12 tracking-tighter">()=&gt;</div>
         
-        {/* Massive brutalist geometric shapes strictly inside background */}
         <div className="absolute top-1/3 left-10 w-32 h-32 bg-brutal-pink border-8 border-black opacity-10 rounded-full shadow-[12px_12px_0px_0px_rgba(0,0,0,1)]"></div>
         <div className="absolute bottom-1/3 right-10 w-48 h-48 bg-brutal-blue border-8 border-black opacity-10 rotate-12 shadow-[12px_12px_0px_0px_rgba(0,0,0,1)]"></div>
         <div className="absolute top-20 right-1/4 w-0 h-0 border-l-[60px] border-r-[60px] border-b-[100px] border-transparent border-b-black opacity-10 rotate-45 drop-shadow-[8px_8px_0px_rgba(0,0,0,1)]"></div>
       </div>
 
-      <div className="w-full max-w-3xl mx-auto p-2 sm:p-4 md:p-8 relative z-10 w-full flex flex-col my-auto sm:my-0">
+      {/* ===== Fixed Action Buttons ===== */}
       <button 
         onClick={() => { playClick(); toggleMute(); }}
-        className={`fixed top-2 right-2 md:top-4 md:right-4 z-50 btn-brutal !py-2 !px-3 md:!px-4 text-xs md:text-xl flex items-center gap-1 md:gap-2 cursor-pointer shadow-brutal-sm hover:shadow-brutal ${isMuted ? 'bg-brutal-red text-white' : 'bg-white'}`}
+        className={`fixed top-2 right-2 sm:top-4 sm:right-4 z-50 btn-brutal !py-1.5 !px-2.5 sm:!py-2 sm:!px-4 text-xs sm:text-base flex items-center gap-1 sm:gap-2 cursor-pointer ${isMuted ? 'bg-brutal-red text-white' : 'bg-white'}`}
         title={isMuted ? "Unmute Sound" : "Mute Sound"}
+        id="mute-toggle"
       >
         {isMuted ? (
-          <><PixelSoundOff className="w-5 h-5 md:w-6 md:h-6 inline-block fill-white" color="currentColor" /> <span className="hidden sm:inline">MUTED</span></>
+          <><PixelSoundOff className="w-4 h-4 sm:w-5 sm:h-5 inline-block fill-white" color="currentColor" /> <span className="hidden sm:inline">MUTED</span></>
         ) : (
-          <><PixelSoundOn className="w-5 h-5 md:w-6 md:h-6 inline-block" /> <span className="hidden sm:inline">SOUND</span></>
+          <><PixelSoundOn className="w-4 h-4 sm:w-5 sm:h-5 inline-block" /> <span className="hidden sm:inline">SOUND</span></>
         )}
       </button>
 
       {gameState !== 'start' && (
         <button 
           onClick={() => { playClick(); setGameState('start'); }}
-          className="fixed top-2 left-2 md:top-4 md:left-4 z-50 btn-brutal btn-brutal-yellow !py-2 !px-3 md:!px-4 text-xs md:text-xl flex items-center gap-1 md:gap-2 cursor-pointer shadow-brutal-sm hover:shadow-brutal"
+          className="fixed top-2 left-2 sm:top-4 sm:left-4 z-50 btn-brutal btn-brutal-yellow !py-1.5 !px-2.5 sm:!py-2 sm:!px-4 text-xs sm:text-base flex items-center gap-1 sm:gap-2 cursor-pointer"
+          id="quit-button"
         >
-          <PixelHome className="w-5 h-5 md:w-6 md:h-6 inline-block" /> <span className="hidden sm:inline">QUIT</span>
+          <PixelHome className="w-4 h-4 sm:w-5 sm:h-5 inline-block" /> <span className="hidden sm:inline">QUIT</span>
         </button>
       )}
 
-      {gameState === 'start' && <StartScreen onStart={handleStart} />}
-      
-      {gameState === 'quiz' && (
-        <QuizCard 
-          question={currentQuestion} 
-          onAnswerSelect={handleAnswerSelect}
-        />
-      )}
-      
-      {gameState === 'feedback' && (
-        <ResultFeedback 
-          isCorrect={userAnswer === currentQuestion.correctAnswer}
-          userAnswer={userAnswer}
-          correctAnswer={currentQuestion.correctAnswer}
-          explanation={currentQuestion.explanation}
-          isGameOver={isGameOver}
-          onNext={handleNext}
-        />
-      )}
+      {/* ===== Main Content Area ===== */}
+      <main className="flex-1 flex flex-col justify-center w-full max-w-3xl mx-auto px-3 py-3 sm:px-4 sm:py-6 md:px-8 md:py-8 relative z-10">
+        {gameState === 'start' && <StartScreen onStart={handleStart} />}
+        
+        {gameState === 'quiz' && (
+          <QuizCard 
+            question={currentQuestion} 
+            onAnswerSelect={handleAnswerSelect}
+          />
+        )}
+        
+        {gameState === 'feedback' && (
+          <ResultFeedback 
+            isCorrect={userAnswer === currentQuestion.correctAnswer}
+            userAnswer={userAnswer}
+            correctAnswer={currentQuestion.correctAnswer}
+            explanation={currentQuestion.explanation}
+            isGameOver={isGameOver}
+            onNext={handleNext}
+          />
+        )}
 
-      {gameState === 'score' && (
-        <ScoreScreen 
-          survived={survived} 
-          totalQuestions={questions.length} 
-          onRestart={() => {
-            reshuffle();
-            setGameState('start');
-          }} 
-        />
-      )}
-      
-      {gameState !== 'start' && gameState !== 'score' && (
-        <div className="mt-4 md:mt-8 flex justify-between items-center w-full max-w-2xl mx-auto space-x-2 md:space-x-4">
-          <div className="font-bold text-sm md:text-lg bg-white border-2 md:border-4 border-black px-2 md:px-4 py-1 md:py-2 transform -rotate-1 shadow-brutal-sm">
-            Survived: {survived}
+        {gameState === 'score' && (
+          <ScoreScreen 
+            survived={survived} 
+            totalQuestions={questions.length} 
+            onRestart={() => {
+              reshuffle();
+              setGameState('start');
+            }} 
+          />
+        )}
+        
+        {/* ===== HUD Bar ===== */}
+        {gameState !== 'start' && gameState !== 'score' && (
+          <div className="mt-3 sm:mt-6 flex justify-between items-center w-full max-w-2xl mx-auto gap-2">
+            <div className="font-bold text-xs sm:text-base bg-white border-2 sm:border-3 border-black px-2 py-1 sm:px-4 sm:py-2 transform -rotate-1 shadow-brutal-sm" id="survived-counter">
+              Survived: {survived}
+            </div>
+            <div className="font-bold text-xs sm:text-base bg-white border-2 sm:border-3 border-black px-2 py-1 sm:px-4 sm:py-2 transform rotate-1 shadow-brutal-sm min-w-[60px] sm:min-w-[100px] text-center flex items-center justify-center gap-1 text-red-500" id="hearts-display">
+              {initialHearts === Infinity 
+                ? <><PixelCrown className="w-4 h-4 sm:w-6 sm:h-6 mr-0.5" color="#FACC15" /> <PixelInfinity className="w-5 h-5 sm:w-8 sm:h-8 text-black" color="currentColor" /></> 
+                : (currentHearts > 0 
+                    ? Array.from({ length: currentHearts }).map((_, i) => <PixelHeart key={i} className="w-3.5 h-3.5 sm:w-5 sm:h-5" color="currentColor" />)
+                    : <PixelSkull className="w-3.5 h-3.5 sm:w-5 sm:h-5 text-black" color="currentColor" />)
+              }
+            </div>
           </div>
-          <div className="font-bold text-sm md:text-lg bg-white border-2 md:border-4 border-black px-2 md:px-4 py-1 md:py-2 transform rotate-1 shadow-brutal-sm min-w-[80px] md:min-w-[100px] text-center flex items-center justify-center gap-1 text-red-500">
-            {initialHearts === Infinity 
-              ? <><PixelCrown className="w-5 h-5 md:w-6 md:h-6 mr-1" color="#FACC15" /> <PixelInfinity className="w-6 h-6 md:w-8 md:h-8 text-black" color="currentColor" /></> 
-              : (currentHearts > 0 
-                  ? Array.from({ length: currentHearts }).map((_, i) => <PixelHeart key={i} className="w-4 h-4 md:w-5 md:h-5" color="currentColor" />)
-                  : <PixelSkull className="w-4 h-4 md:w-5 md:h-5 text-black" color="currentColor" />)
-            }
-          </div>
-        </div>
-      )}
-      
-    </div>
+        )}
+      </main>
     
-      {/* Universal News Ticker Marquee Footer */}
-      <div className="w-full mt-auto shrink-0 bg-brutal-yellow border-t-4 border-black text-black font-black text-base md:text-2xl py-1 md:py-2 px-2 md:px-4 z-40 overflow-hidden whitespace-nowrap select-none pointer-events-none flex">
-        <div className="animate-marquee flex items-center gap-6 md:gap-10 whitespace-nowrap">
+      {/* ===== Marquee Footer ===== */}
+      <div className="w-full shrink-0 bg-brutal-yellow border-t-3 sm:border-t-4 border-black text-black font-black text-sm sm:text-xl md:text-2xl py-1 sm:py-2 px-2 z-40 overflow-hidden whitespace-nowrap select-none pointer-events-none flex pb-safe" id="marquee-footer">
+        <div className="animate-marquee flex items-center gap-4 sm:gap-10 whitespace-nowrap">
           <span>⚠️ WARNING: HIGH LEVELS OF CONTEXT LOSS DETECTED ⚠️</span>
           <span>///</span>
           <span>[] == ![] &rarr; true</span>
