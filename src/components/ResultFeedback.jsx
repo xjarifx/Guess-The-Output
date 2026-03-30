@@ -28,28 +28,28 @@ const ResultFeedback = ({
 
   return (
     <div className={`card-brutal text-center ${bgColor} ${shakeClass}`}>
-      <h2 className="text-5xl font-black mb-6 uppercase border-b-4 border-black pb-4 flex items-center justify-center gap-2">
+      <h2 className="text-3xl md:text-5xl font-black mb-4 md:mb-6 uppercase border-b-2 md:border-b-4 border-black pb-2 md:pb-4 flex items-center justify-center gap-2">
         {isCorrect 
-          ? <>Correct! <PixelParty className="w-10 h-10 text-white" color="currentColor" /></> 
-          : <>Oops! <PixelOops className="w-10 h-10 text-white" color="currentColor" /></>}
+          ? <>Correct! <PixelParty className="w-8 h-8 md:w-10 md:h-10 text-white shrink-0" color="currentColor" /></> 
+          : <>Oops! <PixelOops className="w-8 h-8 md:w-10 md:h-10 text-white shrink-0" color="currentColor" /></>}
       </h2>
       
       {!isCorrect && (
-        <div className="bg-white border-4 border-black p-4 mb-6 font-bold text-xl inline-block transform rotate-1">
+        <div className="bg-white border-2 md:border-4 border-black p-3 md:p-4 mb-4 md:mb-6 font-bold text-base md:text-xl inline-block transform rotate-1 max-w-full overflow-hidden break-words text-left">
           You chose: <span className="text-red-600 line-through">{userAnswer}</span> <br/>
-          Correct Answer: <span className="text-green-600">{correctAnswer}</span>
+          Correct: <span className="text-green-600 break-all">{correctAnswer}</span>
         </div>
       )}
       
-      <div className="bg-white border-4 border-black p-6 mb-8 font-medium text-lg leading-relaxed shadow-brutal-sm text-left">
+      <div className="bg-white border-2 md:border-4 border-black p-4 md:p-6 mb-6 md:mb-8 font-medium text-base md:text-lg leading-relaxed shadow-brutal-sm text-left">
         <p>{explanation}</p>
       </div>
       
       <button 
-        className={`btn-brutal text-xl w-full md:w-auto flex items-center justify-center gap-2 mx-auto md:mx-0 ${isGameOver ? 'btn-brutal-pink' : 'btn-brutal-yellow'}`} 
+        className={`btn-brutal text-lg md:text-xl w-full md:w-auto flex items-center justify-center gap-2 mx-auto md:mx-0 ${isGameOver ? 'btn-brutal-pink' : 'btn-brutal-yellow'}`} 
         onClick={handleNext}
       >
-        {isGameOver ? <>Game Over <PixelSkull className="w-6 h-6" /></> : <>Next Question <PixelArrowRight className="w-6 h-6" /></>}
+        {isGameOver ? <>Game Over <PixelSkull className="w-5 h-5 md:w-6 md:h-6" /></> : <>Next Question <PixelArrowRight className="w-5 h-5 md:w-6 md:h-6" /></>}
       </button>
     </div>
   );
